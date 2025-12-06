@@ -359,6 +359,45 @@
             padding: 40px 20px;
             color: #999;
         }
+
+        .roadmap-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f0f0f0 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .roadmap-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .roadmap-tab {
+            transition: all 0.3s ease !important;
+        }
+
+        .roadmap-tab.active {
+            background: #667eea !important;
+            color: white !important;
+        }
+
+        .roadmap-section {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -533,6 +572,291 @@ End of extract. For detailed pattern-by-pattern breakdown, I recommend storing s
                 </div>
             </div>
         </section>
+        <!-- AI/ML Career Roadmap Section -->
+        <section class="category" id="careerRoadmap" style="margin-bottom:20px;">
+            <div class="category-header">
+                <div class="category-title">🎯 AI/ML Career Roadmap 2025</div>
+                <div class="category-progress" style="color: #fff; opacity:0.95;">
+                    Complete learning path from fundamentals to specialized ML/AI roles. Click topics to track progress.
+                </div>
+            </div>
+            <div style="padding:15px;">
+                <!-- Roadmap Navigation Tabs -->
+                <div style="display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap;border-bottom:2px solid #e2e8f0;padding-bottom:10px;">
+                    <button onclick="showRoadmapSection('fundamentals')" class="roadmap-tab active" style="padding:8px 16px;background:#667eea;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;">📐 Fundamentals</button>
+                    <button onclick="showRoadmapSection('ml')" class="roadmap-tab" style="padding:8px 16px;background:#f0f0f0;color:#333;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🤖 Machine Learning</button>
+                    <button onclick="showRoadmapSection('dl')" class="roadmap-tab" style="padding:8px 16px;background:#f0f0f0;color:#333;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🧠 Deep Learning</button>
+                    <button onclick="showRoadmapSection('mlops')" class="roadmap-tab" style="padding:8px 16px;background:#f0f0f0;color:#333;border:none;border-radius:6px;cursor:pointer;font-weight:600;">⚙️ MLOps</button>
+                    <button onclick="showRoadmapSection('specialization')" class="roadmap-tab" style="padding:8px 16px;background:#f0f0f0;color:#333;border:none;border-radius:6px;cursor:pointer;font-weight:600;">🎓 Specialization</button>
+                </div>
+
+                <!-- Fundamentals Section -->
+                <div id="roadmap-fundamentals" class="roadmap-section">
+                    <h3 style="color:#667eea;margin-bottom:12px;">📐 Foundational Mathematics & Statistics</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🔢 Linear Algebra</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Vector Spaces and Subspaces</li>
+                                <li>✓ Matrices and Matrix Operations</li>
+                                <li>✓ Eigenvalues and Eigenvectors</li>
+                                <li>✓ Singular value Decomposition (SVD)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📊 Calculus</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Derivatives and Gradients</li>
+                                <li>✓ Integrals and Area Under Curve</li>
+                                <li>✓ Multivariate Calculus</li>
+                                <li>✓ Partial Derivatives</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📈 Probability & Statistics</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Probability Distributions (Gaussian, Bernoulli, Poisson)</li>
+                                <li>✓ Hypothesis Testing</li>
+                                <li>✓ Regression Analysis</li>
+                                <li>✓ Bayesian Statistics</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 style="color:#667eea;margin-top:20px;margin-bottom:12px;">💻 Programming Fundamentals</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🐍 Python Proficiency</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Data Structures (List, Tuples, Dictionaries, Sets)</li>
+                                <li>✓ Object-Oriented Programming (OOP)</li>
+                                <li>✓ Functional Programming Concepts</li>
+                                <li>✓ Error handling and Debugging</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📚 Data Manipulation Libraries</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ NumPy (Array Computing, Broadcasting)</li>
+                                <li>✓ Pandas (Data Frames, Aggregations, Merging)</li>
+                                <li>✓ Data Wrangling and Cleaning (VCs)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📊 Data Visualization</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Matplotlib (Basic Plots)</li>
+                                <li>✓ Seaborn (Statistical Data Visualization)</li>
+                                <li>✓ Plotly (Interactive Visualizations)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Machine Learning Section -->
+                <div id="roadmap-ml" class="roadmap-section" style="display:none;">
+                    <h3 style="color:#FF9800;margin-bottom:12px;">🤖 Core Machine Learning</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🎯 Supervised Learning</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Regression (Linear, Polynomial, Ridge, Lasso)</li>
+                                <li>✓ Classification (Logistic Regression, SVM, Naive Bayes, KNN)</li>
+                                <li>✓ Decision Trees & Random Forests</li>
+                                <li>✓ Gradient Boosting (XGBoost, LightGBM)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🔍 Unsupervised Learning</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Clustering (K-Means, DBSCAN, Hierarchical)</li>
+                                <li>✓ Dimensionality Reduction (PCA, t-SNE, UMAP)</li>
+                                <li>✓ Anomaly Detection</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">⚖️ Model Evaluation</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Cross-Validation Techniques</li>
+                                <li>✓ Metrics (Precision, Recall, F1, ROC-AUC)</li>
+                                <li>✓ Hyperparameter Tuning</li>
+                                <li>✓ Feature Engineering</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 style="color:#FF9800;margin-top:20px;margin-bottom:12px;">📚 ML Libraries & Tools</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">Scikit-learn</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Model Selection & Training</li>
+                                <li>✓ Preprocessing & Scaling</li>
+                                <li>✓ Pipeline Construction</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Learning Section -->
+                <div id="roadmap-dl" class="roadmap-section" style="display:none;">
+                    <h3 style="color:#f44336;margin-bottom:12px;">🧠 Deep Learning Architectures</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🔗 Neural Networks</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Perceptrons & Multilayer Networks</li>
+                                <li>✓ Activation Functions (ReLU, Sigmoid, Tanh, Softmax)</li>
+                                <li>✓ Backpropagation</li>
+                                <li>✓ Optimization (SGD, Adam, RMSprop)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">👁️ Convolutional Neural Networks (CNNs)</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Convolutions & Pooling Layers</li>
+                                <li>✓ Transfer Learning (VGG, ResNet, Inception)</li>
+                                <li>✓ Object Detection (YOLO, Faster R-CNN)</li>
+                                <li>✓ Image Segmentation (FCN, U-Net, Mask R-CNN)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📝 Recurrent Neural Networks (RNNs)</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ LSTM (Long Short-Term Memory)</li>
+                                <li>✓ GRU (Gated Recurrent Unit)</li>
+                                <li>✓ Sequence-to-Sequence Models</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">⭐ Transformer Architectures</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Self-Attention Mechanisms</li>
+                                <li>✓ BERT (Bidirectional Encoder Representations)</li>
+                                <li>✓ GPT (Generative Pre-trained Transformers)</li>
+                                <li>✓ Vision Transformers</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 style="color:#f44336;margin-top:20px;margin-bottom:12px;">🛠️ DL Frameworks & Tools</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">TensorFlow & Keras</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Model Building & Training</li>
+                                <li>✓ Custom Layers & Loss Functions</li>
+                                <li>✓ TensorBoard Visualization</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">PyTorch</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Dynamic Computational Graphs</li>
+                                <li>✓ Custom Training Loops</li>
+                                <li>✓ HuggingFace Integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MLOps Section -->
+                <div id="roadmap-mlops" class="roadmap-section" style="display:none;">
+                    <h3 style="color:#4CAF50;margin-bottom:12px;">⚙️ MLOps & Production</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📦 Model Deployment</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ REST APIs (Flask, FastAPI)</li>
+                                <li>✓ Docker & Containerization</li>
+                                <li>✓ Cloud Platforms (AWS, GCP, Azure)</li>
+                                <li>✓ Serverless Functions</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📊 Data Management</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ SQL Databases (PostgreSQL, MySQL)</li>
+                                <li>✓ NoSQL (MongoDB, Firebase)</li>
+                                <li>✓ Data Lakes & Warehouses</li>
+                                <li>✓ Data Versioning (DVC)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🔄 CI/CD & Monitoring</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Version Control (Git, GitHub)</li>
+                                <li>✓ Model Monitoring & Logging</li>
+                                <li>✓ A/B Testing for Models</li>
+                                <li>✓ Performance Metrics Tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialization Section -->
+                <div id="roadmap-specialization" class="roadmap-section" style="display:none;">
+                    <h3 style="color:#9C27B0;margin-bottom:12px;">🎓 AI/ML Specializations</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🗣️ Natural Language Processing (NLP)</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Text Preprocessing & Tokenization</li>
+                                <li>✓ Word Embeddings (Word2Vec, GloVe)</li>
+                                <li>✓ Language Models (LLMs)</li>
+                                <li>✓ Text Classification & Sentiment Analysis</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🎥 Computer Vision</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Image Classification</li>
+                                <li>✓ Object Detection</li>
+                                <li>✓ Optical Character Recognition (OCR)</li>
+                                <li>✓ Facial Recognition</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">⏰ Time Series Analysis</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ ARIMA & SARIMA Models</li>
+                                <li>✓ LSTMs for Forecasting</li>
+                                <li>✓ Feature Engineering for Time Series</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🤝 Reinforcement Learning</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Q-Learning & Deep Q-Networks (DQN)</li>
+                                <li>✓ Policy Gradient Methods</li>
+                                <li>✓ Actor-Critic Methods</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 style="color:#9C27B0;margin-top:20px;margin-bottom:12px;">🎯 Additional Important Skills</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;">
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">🏗️ System Design & Architecture</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Distributed Systems</li>
+                                <li>✓ Scalability & Performance</li>
+                                <li>✓ Design Patterns for ML</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-card">
+                            <div style="font-weight:700;color:#333;margin-bottom:8px;">📊 Communication & Leadership</div>
+                            <ul style="list-style:none;color:#555;font-size:0.95em;">
+                                <li>✓ Presenting Complex Ideas</li>
+                                <li>✓ Cross-functional Collaboration</li>
+                                <li>✓ Stakeholder Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="controls">
             <div class="control-group">
                 <label for="categorySelect">Filter by Category:</label>
@@ -1044,6 +1368,32 @@ End of extract. For detailed pattern-by-pattern breakdown, I recommend storing s
         document.getElementById('categorySelect').addEventListener('change', applyFilters);
         document.getElementById('difficultyFilter').addEventListener('change', applyFilters);
         document.getElementById('searchBox').addEventListener('input', applyFilters);
+
+        // ---------- Career Roadmap Logic ----------
+        function showRoadmapSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.roadmap-section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.roadmap-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.background = '#f0f0f0';
+                tab.style.color = '#333';
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(`roadmap-${sectionName}`);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+
+            // Activate clicked tab
+            event.target.classList.add('active');
+            event.target.style.background = '#667eea';
+            event.target.style.color = 'white';
+        }
 
         initializePage();
     </script>
