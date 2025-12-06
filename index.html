@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode DSA Tracking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        label {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        select, input[type="text"] {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        select:hover, input[type="text"]:hover {
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .category {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: -25px -25px 20px -25px;
+            padding-bottom: 20px;
+            position: sticky;
+            top: -25px;
+        }
+
+        .category-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-progress {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .difficulty-levels {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .difficulty-filter {
+            background: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .difficulty-filter.all {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .difficulty-filter.easy {
+            background: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .difficulty-filter.medium {
+            background: #FF9800;
+            border-color: #FF9800;
+        }
+
+        .difficulty-filter.hard {
+            background: #f44336;
+            border-color: #f44336;
+        }
+
+        .difficulty-filter:hover {
+            transform: scale(1.05);
+        }
+
+        .problems {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .problem {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .problem:hover {
+            background: #e8eaf6;
+            transform: translateX(5px);
+        }
+
+        .problem.hidden {
+            display: none;
+        }
+
+        .problem.completed {
+            opacity: 0.6;
+            background: #e8f5e9;
+            border-left-color: #4CAF50;
+        }
+
+        .problem-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #667eea;
+            flex-shrink: 0;
+        }
+
+        .problem-id {
+            font-weight: 700;
+            color: #667eea;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .problem-name {
+            flex: 1;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .problem.completed .problem-name {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .difficulty {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .difficulty.easy {
+            background: #4CAF50;
+        }
+
+        .difficulty.medium {
+            background: #FF9800;
+        }
+
+        .difficulty.hard {
+            background: #f44336;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .control-group {
+                width: 100%;
+            }
+
+            select, input[type="text"], button {
+                width: 100%;
+            }
+        }
+
+        .export-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .export-btn {
+            padding: 12px 24px;
+            font-size: 1em;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 LeetCode DSA Tracking</h1>
+            <div class="header-info">
+                <div class="stat-card">
+                    <h3 id="totalProblems">0</h3>
+                    <p>Total Problems</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="completedCount">0</h3>
+                    <p>Completed</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="percentageComplete">0%</h3>
+                    <p>Progress</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="remainingCount">0</h3>
+                    <p>Remaining</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="categorySelect">Filter by Category:</label>
+                <select id="categorySelect">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="difficultyFilter">Filter by Difficulty:</label>
+                <select id="difficultyFilter">
+                    <option value="all">All Levels</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="searchBox">Search Problems:</label>
+                <input type="text" id="searchBox" placeholder="Enter problem name or ID...">
+            </div>
+            <button onclick="resetFilters()">Reset Filters</button>
+            <button onclick="exportProgress()" class="export-btn">📥 Export Progress</button>
+        </div>
+
+        <div class="categories" id="categoriesContainer"></div>
+
+        <footer class="footer">
+            <p>💪 Keep grinding! Every problem solved is a step closer to mastery.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Last updated: <span id="lastUpdated">Never</span></p>
+        </footer>
+    </div>
+
+    <script>
+        const problemsData = {
+            "1. Arrays (Core Foundation)": {
+                easy: [
+                    { id: 1, name: "Two Sum" },
+                    { id: 26, name: "Remove Duplicates from Sorted Array" },
+                    { id: 27, name: "Remove Element" },
+                    { id: 35, name: "Search Insert Position" },
+                    { id: 66, name: "Plus One" },
+                    { id: 88, name: "Merge Sorted Array" },
+                    { id: 121, name: "Best Time to Buy and Sell Stock" },
+                    { id: 169, name: "Majority Element" },
+                    { id: 217, name: "Contains Duplicate" },
+                    { id: 219, name: "Contains Duplicate II" },
+                    { id: 268, name: "Missing Number" },
+                    { id: 283, name: "Move Zeroes" },
+                    { id: 349, name: "Intersection of Two Arrays" },
+                    { id: 448, name: "Find All Numbers Disappeared in an Array" },
+                    { id: 485, name: "Max Consecutive Ones" },
+                    { id: 605, name: "Can Place Flowers" },
+                    { id: 628, name: "Maximum Product of Three Numbers" }
+                ],
+                medium: [
+                    { id: 11, name: "Container With Most Water" },
+                    { id: 53, name: "Maximum Subarray" },
+                    { id: 55, name: "Jump Game" },
+                    { id: 56, name: "Merge Intervals" },
+                    { id: 73, name: "Set Matrix Zeroes" },
+                    { id: 75, name: "Sort Colors" },
+                    { id: 118, name: "Pascal's Triangle" },
+                    { id: 119, name: "Pascal's Triangle II" },
+                    { id: 122, name: "Best Time to Buy and Sell Stock II" },
+                    { id: 128, name: "Longest Consecutive Sequence" },
+                    { id: 152, name: "Maximum Product Subarray" },
+                    { id: 189, name: "Rotate Array" },
+                    { id: 238, name: "Product of Array Except Self" },
+                    { id: 287, name: "Find the Duplicate Number" },
+                    { id: 334, name: "Increasing Triplet Subsequence" },
+                    { id: 560, name: "Subarray Sum Equals K" }
+                ],
+                hard: [
+                    { id: 42, name: "Trapping Rain Water" },
+                    { id: 239, name: "Sliding Window Maximum" },
+                    { id: 4, name: "Median of Two Sorted Arrays" }
+                ]
+            },
+            "2. Strings": {
+                easy: [
+                    { id: 20, name: "Valid Parentheses" },
+                    { id: 125, name: "Valid Palindrome" },
+                    { id: 242, name: "Valid Anagram" },
+                    { id: 344, name: "Reverse String" },
+                    { id: 383, name: "Ransom Note" },
+                    { id: 387, name: "First Unique Character" },
+                    { id: 415, name: "Add Strings" },
+                    { id: 520, name: "Detect Capital" },
+                    { id: 541, name: "Reverse String II" }
+                ],
+                medium: [
+                    { id: 3, name: "Longest Substring Without Repeating Characters" },
+                    { id: 5, name: "Longest Palindromic Substring" },
+                    { id: 49, name: "Group Anagrams" },
+                    { id: 151, name: "Reverse Words in a String" },
+                    { id: 424, name: "Longest Repeating Character Replacement" },
+                    { id: 438, name: "Find All Anagrams in a String" },
+                    { id: 567, name: "Permutation in String" },
+                    { id: 647, name: "Palindromic Substrings" }
+                ],
+                hard: [
+                    { id: 76, name: "Minimum Window Substring" },
+                    { id: 214, name: "Shortest Palindrome" }
+                ]
+            },
+            "3. Hashing (Maps & Sets)": {
+                easy: [
+                    { id: 202, name: "Happy Number" },
+                    { id: 205, name: "Isomorphic Strings" },
+                    { id: 290, name: "Word Pattern" },
+                    { id: 409, name: "Longest Palindrome" }
+                ],
+                medium: [
+                    { id: 347, name: "Top K Frequent Elements" },
+                    { id: 454, name: "4Sum II" },
+                    { id: 781, name: "Rabbits in Forest" }
+                ]
+            },
+            "4. Recursion & Backtracking": {
+                easy: [
+                    { id: 509, name: "Fibonacci Number" }
+                ],
+                medium: [
+                    { id: 17, name: "Letter Combinations of a Phone Number" },
+                    { id: 39, name: "Combination Sum" },
+                    { id: 40, name: "Combination Sum II" },
+                    { id: 46, name: "Permutations" },
+                    { id: 47, name: "Permutations II" },
+                    { id: 77, name: "Combinations" },
+                    { id: 78, name: "Subsets" },
+                    { id: 90, name: "Subsets II" },
+                    { id: 22, name: "Generate Parentheses" }
+                ],
+                hard: [
+                    { id: 51, name: "N-Queens" },
+                    { id: 37, name: "Sudoku Solver" }
+                ]
+            },
+            "5. Stack": {
+                easy: [
+                    { id: 232, name: "Implement Queue using Stacks" },
+                    { id: 225, name: "Implement Stack using Queues" },
+                    { id: 1047, name: "Remove All Adjacent Duplicates" }
+                ],
+                medium: [
+                    { id: 155, name: "Min Stack" },
+                    { id: 739, name: "Daily Temperatures" },
+                    { id: 394, name: "Decode String" },
+                    { id: 503, name: "Next Greater Element II" }
+                ],
+                hard: [
+                    { id: 84, name: "Largest Rectangle in Histogram" }
+                ]
+            },
+            "6. Queue & Deque": {
+                medium: [
+                    { id: 622, name: "Design Circular Queue" },
+                    { id: 641, name: "Design Circular Deque" }
+                ]
+            },
+            "7. Linked List": {
+                easy: [
+                    { id: 206, name: "Reverse Linked List" },
+                    { id: 21, name: "Merge Two Sorted Lists" },
+                    { id: 83, name: "Remove Duplicates from Sorted List" },
+                    { id: 141, name: "Linked List Cycle" },
+                    { id: 876, name: "Middle of Linked List" }
+                ],
+                medium: [
+                    { id: 2, name: "Add Two Numbers" },
+                    { id: 19, name: "Remove Nth Node From End" },
+                    { id: 142, name: "Linked List Cycle II" },
+                    { id: 143, name: "Reorder List" },
+                    { id: 148, name: "Sort List" }
+                ]
+            },
+            "8. Trees": {
+                easy: [
+                    { id: 94, name: "Inorder Traversal" },
+                    { id: 144, name: "Preorder Traversal" },
+                    { id: 145, name: "Postorder Traversal" },
+                    { id: 101, name: "Symmetric Tree" },
+                    { id: 104, name: "Maximum Depth of Binary Tree" },
+                    { id: 226, name: "Invert Binary Tree" }
+                ],
+                medium: [
+                    { id: 102, name: "Level Order Traversal" },
+                    { id: 103, name: "Zigzag Level Order" },
+                    { id: 98, name: "Validate BST" },
+                    { id: 230, name: "Kth Smallest in BST" },
+                    { id: 236, name: "Lowest Common Ancestor" }
+                ],
+                hard: [
+                    { id: 124, name: "Binary Tree Maximum Path Sum" },
+                    { id: 297, name: "Serialize and Deserialize Binary Tree" }
+                ]
+            },
+            "9. Heaps & Priority Queue": {
+                medium: [
+                    { id: 215, name: "Kth Largest Element" },
+                    { id: 355, name: "Design Twitter" }
+                ]
+            },
+            "10. Binary Search": {
+                easy: [
+                    { id: 704, name: "Binary Search" }
+                ],
+                medium: [
+                    { id: 34, name: "First and Last Position" },
+                    { id: 153, name: "Find Min in Rotated Sorted Array" },
+                    { id: 33, name: "Search in Rotated Sorted Array" }
+                ],
+                hard: [
+                    { id: 410, name: "Split Array Largest Sum" }
+                ]
+            },
+            "11. Graphs": {
+                medium: [
+                    { id: 200, name: "Number of Islands" },
+                    { id: 695, name: "Max Area of Island" },
+                    { id: 133, name: "Clone Graph" },
+                    { id: 207, name: "Course Schedule" },
+                    { id: 210, name: "Course Schedule II" }
+                ],
+                hard: [
+                    { id: 127, name: "Word Ladder" },
+                    { id: 269, name: "Alien Dictionary" }
+                ]
+            },
+            "12. Dynamic Programming": {
+                easy: [
+                    { id: 70, name: "Climbing Stairs" },
+                    { id: 746, name: "Min Cost Climbing Stairs" }
+                ],
+                medium: [
+                    { id: 198, name: "House Robber" },
+                    { id: 213, name: "House Robber II" },
+                    { id: 300, name: "Longest Increasing Subsequence" },
+                    { id: 322, name: "Coin Change" },
+                    { id: 416, name: "Partition Equal Subset Sum" },
+                    { id: 1143, name: "Longest Common Subsequence" }
+                ],
+                hard: [
+                    { id: 72, name: "Edit Distance" },
+                    { id: 312, name: "Burst Balloons" },
+                    { id: 1340, name: "Jump Game V" }
+                ]
+            }
+        };
+
+        let completedProblems = JSON.parse(localStorage.getItem('completedProblems')) || [];
+
+        function initializePage() {
+            renderCategories();
+            populateCategoryFilter();
+            updateStats();
+            updateLastUpdated();
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = '';
+
+            for (const [category, difficulties] of Object.entries(problemsData)) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.dataset.category = category;
+
+                let totalProblems = 0;
+                let completedCount = 0;
+
+                for (const [difficulty, problems] of Object.entries(difficulties)) {
+                    totalProblems += problems.length;
+                    completedCount += problems.filter(p => completedProblems.includes(p.id)).length;
+                }
+
+                const progressPercent = totalProblems > 0 ? (completedCount / totalProblems) * 100 : 0;
+
+                let html = `
+                    <div class="category-header">
+                        <div class="category-title">${category}</div>
+                        <div class="category-progress">
+                            ${completedCount}/${totalProblems} Completed
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                for (const [difficulty, problems] of Object.entries(difficulties)) {
+                    if (problems.length === 0) continue;
+
+                    html += `<div class="difficulty-filter ${difficulty} all">${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</div>`;
+                    html += '<div class="problems">';
+
+                    problems.forEach(problem => {
+                        const isCompleted = completedProblems.includes(problem.id);
+                        html += `
+                            <div class="problem ${isCompleted ? 'completed' : ''}" data-id="${problem.id}" data-difficulty="${difficulty}">
+                                <input type="checkbox" class="problem-checkbox" ${isCompleted ? 'checked' : ''} onchange="toggleProblem(${problem.id})">
+                                <span class="problem-id">${problem.id}</span>
+                                <span class="problem-name">${problem.name}</span>
+                                <span class="difficulty ${difficulty}">${difficulty.toUpperCase()}</span>
+                            </div>
+                        `;
+                    });
+
+                    html += '</div>';
+                }
+
+                categoryDiv.innerHTML = html;
+                container.appendChild(categoryDiv);
+            }
+        }
+
+        function toggleProblem(problemId) {
+            const index = completedProblems.indexOf(problemId);
+            if (index > -1) {
+                completedProblems.splice(index, 1);
+            } else {
+                completedProblems.push(problemId);
+            }
+            localStorage.setItem('completedProblems', JSON.stringify(completedProblems));
+            updateStats();
+            updateLastUpdated();
+            applyFilters();
+        }
+
+        function updateStats() {
+            let totalProblems = 0;
+            for (const difficulties of Object.values(problemsData)) {
+                for (const problems of Object.values(difficulties)) {
+                    totalProblems += problems.length;
+                }
+            }
+
+            const completedCount = completedProblems.length;
+            const percentageComplete = totalProblems > 0 ? ((completedCount / totalProblems) * 100).toFixed(1) : 0;
+            const remainingCount = totalProblems - completedCount;
+
+            document.getElementById('totalProblems').textContent = totalProblems;
+            document.getElementById('completedCount').textContent = completedCount;
+            document.getElementById('percentageComplete').textContent = `${percentageComplete}%`;
+            document.getElementById('remainingCount').textContent = remainingCount;
+        }
+
+        function populateCategoryFilter() {
+            const select = document.getElementById('categorySelect');
+            for (const category of Object.keys(problemsData)) {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                select.appendChild(option);
+            }
+        }
+
+        function applyFilters() {
+            const categoryFilter = document.getElementById('categorySelect').value;
+            const difficultyFilter = document.getElementById('difficultyFilter').value;
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+
+            document.querySelectorAll('.category').forEach(category => {
+                let categoryMatch = categoryFilter === 'all' || category.dataset.category === categoryFilter;
+                let hasVisibleProblems = false;
+
+                category.querySelectorAll('.problem').forEach(problem => {
+                    const difficulty = problem.dataset.difficulty;
+                    const problemName = problem.querySelector('.problem-name').textContent.toLowerCase();
+                    const problemId = problem.dataset.id;
+
+                    const difficultyMatch = difficultyFilter === 'all' || difficulty === difficultyFilter;
+                    const searchMatch = searchTerm === '' || problemName.includes(searchTerm) || problemId.includes(searchTerm);
+
+                    if (categoryMatch && difficultyMatch && searchMatch) {
+                        problem.classList.remove('hidden');
+                        hasVisibleProblems = true;
+                    } else {
+                        problem.classList.add('hidden');
+                    }
+                });
+
+                category.style.display = hasVisibleProblems ? 'block' : 'none';
+            });
+        }
+
+        function resetFilters() {
+            document.getElementById('categorySelect').value = 'all';
+            document.getElementById('difficultyFilter').value = 'all';
+            document.getElementById('searchBox').value = '';
+            applyFilters();
+        }
+
+        function updateLastUpdated() {
+            const now = new Date();
+            const timeString = now.toLocaleString();
+            document.getElementById('lastUpdated').textContent = timeString;
+        }
+
+        function exportProgress() {
+            let exportData = "LeetCode DSA Progress Report\n";
+            exportData += "============================\n\n";
+
+            for (const [category, difficulties] of Object.entries(problemsData)) {
+                let categoryCompleted = 0;
+                let categoryTotal = 0;
+
+                exportData += `${category}\n`;
+                exportData += "-".repeat(50) + "\n";
+
+                for (const [difficulty, problems] of Object.entries(difficulties)) {
+                    for (const problem of problems) {
+                        categoryTotal++;
+                        if (completedProblems.includes(problem.id)) {
+                            categoryCompleted++;
+                            exportData += `✓ [${problem.id}] ${problem.name} (${difficulty})\n`;
+                        } else {
+                            exportData += `○ [${problem.id}] ${problem.name} (${difficulty})\n`;
+                        }
+                    }
+                }
+
+                exportData += `\nProgress: ${categoryCompleted}/${categoryTotal}\n\n`;
+            }
+
+            const totalProblems = Array.from(document.querySelectorAll('.problem')).length;
+            const completedCount = completedProblems.length;
+            const percentageComplete = ((completedCount / totalProblems) * 100).toFixed(1);
+
+            exportData += "Overall Progress\n";
+            exportData += "-".repeat(50) + "\n";
+            exportData += `Total Completed: ${completedCount}/${totalProblems} (${percentageComplete}%)\n`;
+            exportData += `Remaining: ${totalProblems - completedCount} problems\n`;
+
+            const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(exportData);
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", `leetcode-progress-${new Date().toISOString().split('T')[0]}.txt`);
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        document.getElementById('categorySelect').addEventListener('change', applyFilters);
+        document.getElementById('difficultyFilter').addEventListener('change', applyFilters);
+        document.getElementById('searchBox').addEventListener('input', applyFilters);
+
+        initializePage();
+    </script>
+</body>
+</html>
